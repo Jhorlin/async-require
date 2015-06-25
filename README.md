@@ -1,4 +1,4 @@
-# async-require becaouse require-async was taken
+# async-require
 
     <a name="module_async-require"></a>
 ## async-require
