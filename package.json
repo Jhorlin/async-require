@@ -33,5 +33,16 @@
     "gulp-nsp": "^0.4.5",
     "jshint-stylish": "^2.0.1",
     "run-sequence": "^1.1.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jhorlin/async-require.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jhorlin/async-require/issues"
+  },
+  "homepage": "https://github.com/Jhorlin/async-require#readme"
 }
