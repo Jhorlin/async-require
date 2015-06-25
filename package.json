@@ -1,0 +1,32 @@
+{
+  "name": "require-async",
+  "version": "1.0.0",
+  "description": "async module loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.30"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "extend": "^2.0.1",
+    "gulp": "^3.9.0",
+    "gulp-buddy.js": "^1.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-coverage": "^0.3.36",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-expect-file": "0.0.7",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jsdoc-to-markdown": "^1.1.1",
+    "gulp-jshint": "^1.11.0",
+    "gulp-jsinspect": "^1.0.1",
+    "gulp-mocha": "^2.1.2",
+    "gulp-nsp": "^0.4.5",
+    "jshint-stylish": "^2.0.1",
+    "run-sequence": "^1.1.1"
+  }
+}
