@@ -1,5 +1,6 @@
 # async-require
-
+[![Build Status](https://travis-ci.org/Jhorlin/async-require.svg?branch=master)](https://travis-ci.org/Jhorlin/async-require)
+[![Coverage Status](https://coveralls.io/repos/Jhorlin/async-require/badge.svg)](https://coveralls.io/r/Jhorlin/async-require)
     <a name="module_async-require"></a>
 ## async-require
 asyncronous module loader
