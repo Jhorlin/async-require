@@ -1,12 +1,17 @@
 {
-  "name": "require-async",
+  "name": "async-require",
   "version": "1.0.0",
   "description": "async module loader",
   "main": "index.js",
   "scripts": {
     "test": "gulp"
   },
-  "author": "",
+  "author": "https://github.com/Jhorlin",
+  "keywords": [
+    "require",
+    "async",
+    "module"
+  ],
   "license": "ISC",
   "dependencies": {
     "bluebird": "^2.9.30"
