@@ -5,6 +5,7 @@
     "use strict";
     var vm = require('vm'),
         fs = require('fs'),
+        path = require('path'),
         Module = module.__proto__.constructor,
         Promise = require('bluebird');
 
@@ -23,6 +24,12 @@
     }
 
     requireAsync.cache = {};
-    requireAsync.load = Promise.promisify(fs.readFile);
+    requireAsync.load = (function(readFile){
+        return function(file){
+            return readFile(path.relative(__dirname, file));
+        }
+    }(Promise.promisify(fs.readFile)))
+
+
     module.exports = requireAsync;
 }(module))
