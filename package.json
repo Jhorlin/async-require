@@ -14,7 +14,8 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^2.9.30"
+    "bluebird": "^2.9.30",
+    "callsite": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",

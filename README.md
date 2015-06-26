@@ -10,7 +10,7 @@ asyncronous module loader
 
 * [async-require](#module_async-require)
   * [requireAsync(module)](#exp_module_async-require--requireAsync) ⇒ <code>Promise.&lt;(module\|Error)&gt;</code> ⏏
-    * [~load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in a Buffer()](#module_async-require--requireAsync..load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in a Buffer)
+    * [~load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an objectwith a toString method such as a Buffer or a String.()](#module_async-require--requireAsync..load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an objectwith a toString method such as a Buffer or a String.)
 
 <a name="exp_module_async-require--requireAsync"></a>
 ### requireAsync(module) ⇒ <code>Promise.&lt;(module\|Error)&gt;</code> ⏏
@@ -22,8 +22,10 @@ asyncronous module loader
 
 **Example**  
 ```js//load script myModule.jsasyncRequire('myModule').then(function(module){  //module has been exported});```
-<a name="module_async-require--requireAsync..load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in a Buffer"></a>
-#### requireAsync~load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in a Buffer()
-load is used by async-require to 56847the script. By default it load a file
+<a name="module_async-require--requireAsync..load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an objectwith a toString method such as a Buffer or a String."></a>
+#### requireAsync~load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an objectwith a toString method such as a Buffer or a String.()
+load is used by async-require to load the script. By default it load a file relative to the calling modulesimilar to how require works when loading module not installed through npm. Since this function is public you canset a new load method.
 
 **Kind**: inner method of <code>[requireAsync](#exp_module_async-require--requireAsync)</code>  
+**Example**  
+load a script with request```jsvar asyncRequire = require('async-require'),    request = require('request'),    Promise = require('promise'),    //load must return a promise    get = Promise.promisify(request.get);    //overwrite the default load    asyncRequire.load = function(url){         //get the script         return get(url).spread(function(res, body){             //returrn only the body of the script             return body;         })    }```

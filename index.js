@@ -18,6 +18,7 @@
         fs = require('fs'),
         path = require('path'),
         extend = require('extend'),
+        callsite = require('callsite'),
         Module = module.__proto__.constructor,
         Promise = require('bluebird');
 
@@ -54,14 +55,37 @@
     requireAsync.cache = {};
 
     /**
-     * load is used by async-require to 56847the script. By default it load a file
+     * load is used by async-require to load the script. By default it load a file relative to the calling module
+     * similar to how require works when loading module not installed through npm. Since this function is public you can
+     * set a new load method.
+     *@example
+     * load a script with request
+     * ```js
+     * var asyncRequire = require('async-require'),
+     *     request = require('request'),
+     *     Promise = require('promise'),
+     *     //load must return a promise
+     *     get = Promise.promisify(request.get);
      *
+     *     //overwrite the default load
+     *     asyncRequire.load = function(url){
+     *          //get the script
+     *          return get(url).spread(function(res, body){
+     *              //returrn only the body of the script
+     *              return body;
+     *          })
+     *     }
+     * ```
      *
-     * @function load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in a Buffer
+     * @function load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an object
+     * with a toString method such as a Buffer or a String.
      */
     requireAsync.load = (function (readFile) {
         return function (file) {
-            return readFile(path.relative(__dirname, file));
+            var stack = callsite(),
+                requesterFile = stack[2].getFileName(),
+                requesterPath = path.dirname(requesterFile);
+            return readFile(path.join(requesterPath, file));
         }
     }(Promise.promisify(fs.readFile)))
 
