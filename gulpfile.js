@@ -20,7 +20,7 @@
         concat = require('gulp-concat'),
         expect = require('gulp-expect-file'),
         paths = {
-            src: ['statusCodes.js', 'index.js'],
+            src: ['index.js'],
             unit: 'test/**/*.unit.js',
             lcov: 'reports/coverage.lcov'
         },

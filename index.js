@@ -12,18 +12,19 @@
  * @module async-require
  */
 
-(function (module) {
-    "use strict";
+(function (module, global) {
+    'use strict';
     var vm = require('vm'),
         fs = require('fs'),
         path = require('path'),
+        extend = require('extend'),
         Module = module.__proto__.constructor,
         Promise = require('bluebird');
 
     /**
-     *
      * @example
      * ```js
+     * //load script myModule.js
      * asyncRequire('myModule').then(function(module){
      *   //module has been exported
      * });
@@ -39,14 +40,25 @@
                 .load(module + '.js')
                 .then(function (data) {
                     var script = data.toString(),
-                        sandbox = {module: new Module(moduleId, module.parent)},
-                        context = vm.createContext(sandbox);
-                    vm.runInContext(script, context);
-                    return context.module.exports;
+                        sandboxModule = new Module(moduleId, module.parent),
+                        sandbox = {
+                            module: sandboxModule,
+                            exports: sandboxModule.exports
+                        };
+                    vm.runInNewContext(script, extend({}, global, sandbox));
+                    return sandbox.module.exports;
                 })
     }
 
+
     requireAsync.cache = {};
+
+    /**
+     * load is used by async-require to 56847the script. By default it load a file
+     *
+     *
+     * @function load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in a Buffer
+     */
     requireAsync.load = (function (readFile) {
         return function (file) {
             return readFile(path.relative(__dirname, file));
@@ -55,4 +67,4 @@
 
 
     module.exports = requireAsync;
-}(module))
+}(module, global));
