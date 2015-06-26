@@ -38,7 +38,7 @@
         var moduleId = module + '.js';
         return moduleId in requireAsync.cache ? requireAsync.cache[moduleId] : requireAsync.cache[moduleId] =
             requireAsync
-                .load(module + '.js')
+                .load(module)
                 .then(function (data) {
                     var script = data.toString(),
                         sandboxModule = new Module(moduleId, module.parent),
@@ -85,7 +85,7 @@
             var stack = callsite(),
                 requesterFile = stack[2].getFileName(),
                 requesterPath = path.dirname(requesterFile);
-            return readFile(path.join(requesterPath, file));
+            return readFile(path.join(requesterPath, file) + '.js');
         }
     }(Promise.promisify(fs.readFile)))
 
