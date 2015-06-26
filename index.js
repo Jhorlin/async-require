@@ -77,8 +77,8 @@
      *     }
      * ```
      *
-     * @function load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an object
-     * with a toString method such as a Buffer or a String.
+     * @function load - A promisified function that accepts a moduleId as an argument and returns a promise resolving in an object with a toString method such as a Buffer or a String.
+     * @public
      */
     requireAsync.load = (function (readFile) {
         return function (file) {

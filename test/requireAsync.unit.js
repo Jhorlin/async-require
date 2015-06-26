@@ -5,12 +5,6 @@
     var requireAsync = require('../index'),
         expect = require('chai').expect;
     describe("test async loading", function(){
-        //it("should load module 'loadme'", function(){
-        //    return requireAsync('test/scripts/loadme')
-        //        .then(function(module){
-        //            expect(module).to.eql({message:'hello world!'});
-        //        });
-        //})
 
         it("should load module 'loadme'", function(){
             return requireAsync('./scripts/loadme')
