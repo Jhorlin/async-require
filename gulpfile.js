@@ -136,10 +136,13 @@
 
     gulp.task('cover', ['unit', 'instrument', 'mocha', 'gather', 'format', 'report', 'enforce', 'process']);
 
+    gulp.task('travis', ['default'], function () {
+        return runSequence('track');
+    })
     /**********/
 
-    gulp.task('default', ['cover', 'quality', 'secure', 'style'], function () {
-        return runSequence(['track']);
+    gulp.task('default', function () {
+        return runSequence('cover', 'quality', 'secure', 'style');
     })
 
 }())

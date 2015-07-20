@@ -20,6 +20,7 @@
         extend = require('extend'),
         callsite = require('callsite'),
         Module = module.__proto__.constructor,
+        stackDepth = 2,
         Promise = require('bluebird');
 
     /**
@@ -34,7 +35,7 @@
      * @param {string} module - the path to the module without a .js extension
      * @returns {Promise<module|Error>}
      */
-    function requireAsync (module) {
+    function requireAsync(module) {
         var moduleId = module + '.js';
         return moduleId in requireAsync.cache ? requireAsync.cache[moduleId] : requireAsync.cache[moduleId] =
             requireAsync
@@ -48,9 +49,8 @@
                         };
                     vm.runInNewContext(script, extend({}, global, sandbox));
                     return sandbox.module.exports;
-                })
+                });
     }
-
 
     requireAsync.cache = {};
 
@@ -83,12 +83,11 @@
     requireAsync.load = (function (readFile) {
         return function (file) {
             var stack = callsite(),
-                requesterFile = stack[2].getFileName(),
+                requesterFile = stack[stackDepth].getFileName(),
                 requesterPath = path.dirname(requesterFile);
             return readFile(path.join(requesterPath, file) + '.js');
-        }
-    }(Promise.promisify(fs.readFile)))
-
+        };
+    }(Promise.promisify(fs.readFile)));
 
     module.exports = requireAsync;
 }(module, global));
