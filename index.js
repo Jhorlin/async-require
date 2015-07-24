@@ -12,7 +12,7 @@
  * @module async-require
  */
 
-(function (module, global) {
+(function (module, global, require) {
     'use strict';
     var vm = require('vm'),
         fs = require('fs'),
@@ -47,7 +47,7 @@
                             module: sandboxModule,
                             exports: sandboxModule.exports
                         };
-                    vm.runInNewContext(script, extend({}, global, sandbox));
+                    vm.runInNewContext(script, extend({require:require}, global, sandbox));
                     return sandbox.module.exports;
                 });
     }
@@ -90,4 +90,4 @@
     }(Promise.promisify(fs.readFile)));
 
     module.exports = requireAsync;
-}(module, global));
+}(module, global, require));
