@@ -19,7 +19,7 @@
         path = require('path'),
         extend = require('extend'),
         callsite = require('callsite'),
-        Module = module.__proto__.constructor,
+        Module = require('module'),
         stackDepth = 2,
         Promise = require('bluebird');
 

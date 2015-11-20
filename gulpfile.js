@@ -100,7 +100,7 @@
 
     gulp.task('nsp', function (done) {
         nsp({
-            path: './package.json'
+            package: __dirname + '/package.json'
         }, done);
     });
 
